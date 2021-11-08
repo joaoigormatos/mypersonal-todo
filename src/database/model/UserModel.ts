@@ -50,6 +50,6 @@ const userSchema = new Schema<UserType>({
   },
 });
 
-const userModel = mongoose.model<UserType>("User", userSchema);
+const userModel = mongoose.model<UserType>("User_Mypersonal_Todo", userSchema);
 
 export default userModel;

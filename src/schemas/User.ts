@@ -7,3 +7,19 @@ export type UserType = {
   name: string;
   todos: Todo[];
 };
+
+export type UserDTO = {
+  email: string;
+  password: string;
+  name: string;
+};
+
+export type UserLogin = {
+  email: string;
+  password: string;
+};
+
+export type UserSinginResponse = {
+  auth: boolean;
+  token: string;
+};
