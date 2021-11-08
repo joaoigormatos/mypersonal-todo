@@ -29,6 +29,18 @@ class TodoController {
         .json(httpErrorFactory(err?.type || 500, err?.message));
     }
   }
+  async fetchAll(req: Request, res: Response) {
+    try {
+      const { userID } = req.body;
+      const response = await userTodoService.fetchAll(userID);
+
+      return res.status(200).json(response);
+    } catch (err: any) {
+      return res
+        .status(err?.type || 500)
+        .json(httpErrorFactory(err?.type || 500, err?.message));
+    }
+  }
 }
 
 export default TodoController;

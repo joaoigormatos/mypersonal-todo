@@ -6,6 +6,20 @@ import GeneralException from "../errors/GeneralError";
 import { ExceptionType } from "../schemas/Errors";
 
 export default class UserTodoService {
+  async fetchAll(userID: string) {
+    try {
+      //Fetch the user model
+      const user = await this.fetchUser(userID);
+      //Check if the users exists
+      if (!user) {
+        //Throw custom error
+        throw new GeneralException(ExceptionType.NOT_FOUND, "User not found!!");
+      }
+      return user.todos;
+    } catch (error: any) {
+      throw error;
+    }
+  }
   async addTodo(todoDTO: TodoDTO) {
     try {
       //Fetch the user model
