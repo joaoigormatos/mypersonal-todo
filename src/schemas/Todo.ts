@@ -2,7 +2,7 @@ export type TodoDTO = {
   title: string;
   description: string;
   date: Date;
-  userId: string;
+  userID: string;
 };
 
 export type Todo = {
@@ -10,5 +10,6 @@ export type Todo = {
   title: string;
   description: string;
   date: Date;
-  userId: string;
+  userID: string;
+  finished?: boolean;
 };
