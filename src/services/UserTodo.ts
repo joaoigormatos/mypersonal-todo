@@ -13,10 +13,10 @@ export default class UserTodoService {
         //Throw custom error
         throw new Error("User does not exits");
       }
-      user.todos.push({ ...todoDTO, id: uuid() });
       //Update the user Array with the todoDTO
-      await userModel.updateOne({}, { todos: user.todos });
+      user.todos.push({ ...todoDTO, id: uuid() });
       //Update the user
+      await userModel.updateOne({}, { todos: user.todos });
       return user;
     } catch (error) {
       console.error(error);
@@ -25,10 +25,10 @@ export default class UserTodoService {
     //Fetch the userId
     //If the user does not exist raise a 404 expection error
   }
-  async fetchUser(userId: string) {
+  private async fetchUser(userId: string) {
     // eslint-disable-next-line no-useless-catch
     try {
-      return await userModel.find({ id: userId });
+      return await userModel.findOne({ id: userId });
     } catch (error) {
       throw error;
     }
