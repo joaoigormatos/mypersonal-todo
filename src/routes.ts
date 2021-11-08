@@ -10,6 +10,7 @@ router.post("/user/singup", userController.singup);
 //Todo
 router.post("/user/todo", authMiddleware, todoController.add);
 router.delete("/user/todo/:id", authMiddleware, todoController.delete);
+router.get("/user/todo/:id", authMiddleware, todoController.fetchOne);
 router.get("/user/todo/", authMiddleware, todoController.fetchAll);
 
 export default router;
