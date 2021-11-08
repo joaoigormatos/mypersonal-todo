@@ -2,28 +2,31 @@
 import { TodoDTO } from "../schemas/Todo";
 import userModel from "../database/model/UserModel";
 import { v4 as uuid } from "uuid";
+import GeneralException from "../errors/GeneralError";
+import { ExceptionType } from "../schemas/Errors";
 
 export default class UserTodoService {
   async addTodo(todoDTO: TodoDTO) {
     try {
       //Fetch the user model
-      const user = await this.fetchUser(todoDTO.userId);
+      const user = await this.fetchUser(todoDTO.userID);
       //Check if the users exists
       if (!user) {
         //Throw custom error
-        throw new Error("User does not exits");
+        throw new GeneralException(ExceptionType.NOT_FOUND, "User not found!!");
       }
+      const todo = {
+        ...todoDTO,
+        id: uuid(),
+      };
       //Update the user Array with the todoDTO
-      user.todos.push({ ...todoDTO, id: uuid() });
+      user.todos.push(todo);
       //Update the user
-      await userModel.updateOne({}, { todos: user.todos });
-      return user;
-    } catch (error) {
-      console.error(error);
+      await userModel.updateOne({ id: todoDTO.userID }, { todos: user.todos });
+      return todo;
+    } catch (error: any) {
       throw error;
     }
-    //Fetch the userId
-    //If the user does not exist raise a 404 expection error
   }
   private async fetchUser(userId: string) {
     // eslint-disable-next-line no-useless-catch

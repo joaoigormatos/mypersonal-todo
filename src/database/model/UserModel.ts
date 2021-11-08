@@ -21,9 +21,13 @@ const todoSchema = new Schema<Todo>({
     type: Date,
     required: true,
   },
-  userId: {
+  userID: {
     type: String,
     required: true,
+  },
+  finished: {
+    type: Boolean,
+    default: false,
   },
 });
 const userSchema = new Schema<UserType>({

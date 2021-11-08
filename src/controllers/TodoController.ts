@@ -5,11 +5,12 @@ class TodoController {
   async add(req: Request, res: Response) {
     try {
       const payload: TodoDTO = req.body;
-      //Call service to add a todo
-      await userTodoService.addTodo(payload);
-      //handle response
-    } catch (err) {
-      //Do something with the error
+
+      const response = await userTodoService.addTodo(payload);
+
+      return res.status(201).json(response);
+    } catch (err: any) {
+      return res.status(err?.type || 500).json(err?.type || 500);
     }
   }
 }
