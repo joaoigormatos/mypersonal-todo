@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { TodoDTO } from "../schemas/Todo";
+import { TodoDTO, TodoDTODelete } from "../schemas/Todo";
 import userModel from "../database/model/UserModel";
 import { v4 as uuid } from "uuid";
 import GeneralException from "../errors/GeneralError";
@@ -24,6 +24,26 @@ export default class UserTodoService {
       //Update the user
       await userModel.updateOne({ id: todoDTO.userID }, { todos: user.todos });
       return todo;
+    } catch (error: any) {
+      throw error;
+    }
+  }
+  async deleteTodo(todoDTO: TodoDTODelete) {
+    try {
+      const user = await this.fetchUser(todoDTO.userID);
+      if (!user) {
+        throw new GeneralException(ExceptionType.NOT_FOUND, "User not found!!");
+      }
+      const fetchedTodo = user.todos.find((item) => item.id === todoDTO.id);
+
+      if (!fetchedTodo) {
+        throw new GeneralException(ExceptionType.NOT_FOUND, "Todo not found!!");
+      }
+      user.todos = user.todos.filter((item) => item.id !== todoDTO.id);
+
+      await userModel.updateOne({ id: todoDTO.userID }, { todos: user.todos });
+      console.log("Here i am");
+      return fetchedTodo;
     } catch (error: any) {
       throw error;
     }

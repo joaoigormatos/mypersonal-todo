@@ -13,3 +13,8 @@ export type Todo = {
   userID: string;
   finished?: boolean;
 };
+
+export type TodoDTODelete = {
+  userID: string;
+  id: string;
+};
