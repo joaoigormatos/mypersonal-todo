@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import httpErrorFactory from "../errors/helpers/httpErrorFactory";
 import { UserDTO } from "../schemas/User";
 import { userService } from "../services";
 
@@ -13,8 +14,10 @@ export default class UserController {
       return res.status(200).json(response);
       //if it does not should return 404 status code
       //if it does return the jwt code
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      return res
+        .status(error?.type || 500)
+        .json(httpErrorFactory(error?.type || 500, error?.message));
     }
   }
   async singup(req: Request, res: Response) {
@@ -23,11 +26,10 @@ export default class UserController {
 
       await userService.singup({ email, name, password });
       return res.status(201).json({ message: "User created" });
-    } catch (e) {
-      console.log("Error trying to singup a user");
+    } catch (error: any) {
       return res
-        .status(500)
-        .json({ message: "Internal server error! Please try again later" });
+        .status(error?.type || 500)
+        .json(httpErrorFactory(error?.type || 500, error?.message));
     }
   }
 }

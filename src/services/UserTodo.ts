@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 /* eslint-disable no-console */
 import { TodoDTO, TodoDTOOperation } from "../schemas/Todo";
 import userModel from "../database/model/UserModel";
