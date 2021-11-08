@@ -14,7 +14,7 @@ export type Todo = {
   finished?: boolean;
 };
 
-export type TodoDTODelete = {
+export type TodoDTOOperation = {
   userID: string;
   id: string;
 };
