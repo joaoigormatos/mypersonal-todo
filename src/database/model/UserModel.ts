@@ -25,9 +25,9 @@ const todoSchema = new Schema<Todo>({
     type: String,
     required: true,
   },
-  finished: {
-    type: Boolean,
-    default: false,
+  status: {
+    type: String,
+    default: "progress",
   },
 });
 const userSchema = new Schema<UserType>({
