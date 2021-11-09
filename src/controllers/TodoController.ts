@@ -31,8 +31,13 @@ class TodoController {
   }
   async fetchAll(req: Request, res: Response) {
     try {
+      //Update this method to receive a query parameter and check if it has a valid type
+      const { status } = req.query;
+      if (status && status !== "completed" && status !== "progress") {
+        return res.status(200).json([]);
+      }
       const { userID } = req.body;
-      const response = await userTodoService.fetchAll(userID);
+      const response = await userTodoService.fetchAll(userID, status);
 
       return res.status(200).json(response);
     } catch (err: any) {

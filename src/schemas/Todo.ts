@@ -3,6 +3,7 @@ export type TodoDTO = {
   description: string;
   date: Date;
   userID: string;
+  status: "completed" | "progress";
 };
 
 export type Todo = {
@@ -11,7 +12,7 @@ export type Todo = {
   description: string;
   date: Date;
   userID: string;
-  finished?: boolean;
+  status: "completed" | "progress";
 };
 
 export type TodoDTOOperation = {

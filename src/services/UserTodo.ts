@@ -26,7 +26,7 @@ export default class UserTodoService {
       throw error;
     }
   }
-  async fetchAll(userID: string) {
+  async fetchAll(userID: string, status?: string) {
     try {
       //Fetch the user model
       const user = await this.fetchUser(userID);
@@ -35,7 +35,10 @@ export default class UserTodoService {
         //Throw custom error
         throw new GeneralException(ExceptionType.NOT_FOUND, "User not found!!");
       }
-      return user.todos;
+
+      return status
+        ? user.todos.filter((item) => item.status === status)
+        : user.todos;
     } catch (error: any) {
       throw error;
     }
