@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-catch */
 /* eslint-disable no-console */
-import { TodoDTO, TodoDTOOperation } from "../schemas/Todo";
+import { Todo, TodoDTO, TodoDTOOperation } from "../schemas/Todo";
 import userModel from "../database/model/UserModel";
 import { v4 as uuid } from "uuid";
 import GeneralException from "../errors/GeneralError";
@@ -58,6 +58,36 @@ export default class UserTodoService {
       };
       //Update the user Array with the todoDTO
       user.todos.push(todo);
+      //Update the user
+      await userModel.updateOne({ id: todoDTO.userID }, { todos: user.todos });
+      return todo;
+    } catch (error: any) {
+      throw error;
+    }
+  }
+
+  async updateTodo(todoDTO: Todo) {
+    try {
+      //Fetch the user model
+      const user = await this.fetchUser(todoDTO.userID);
+      //Check if the users exists
+      if (!user) {
+        //Throw custom error
+        throw new GeneralException(ExceptionType.NOT_FOUND, "User not found!!");
+      }
+
+      const fetchedTodo = user.todos.find((item) => item.id === todoDTO.id);
+
+      if (!fetchedTodo) {
+        throw new GeneralException(ExceptionType.NOT_FOUND, "Todo not found!!");
+      }
+      const todo = {
+        ...todoDTO,
+      };
+      //Update the user Array with the todoDTO
+      const position = user.todos.indexOf(fetchedTodo);
+      console.log(todo);
+      user.todos[position] = todo;
       //Update the user
       await userModel.updateOne({ id: todoDTO.userID }, { todos: user.todos });
       return todo;
