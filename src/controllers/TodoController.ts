@@ -16,6 +16,23 @@ class TodoController {
         .json(httpErrorFactory(err?.type || 500, err?.message));
     }
   }
+  async update(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const payload: TodoDTO = req.body;
+
+      const response = await userTodoService.updateTodo({
+        ...payload,
+        id,
+      });
+
+      return res.status(200).json(response);
+    } catch (err: any) {
+      return res
+        .status(err?.type || 500)
+        .json(httpErrorFactory(err?.type || 500, err?.message));
+    }
+  }
   async delete(req: Request, res: Response) {
     try {
       const { id } = req.params;

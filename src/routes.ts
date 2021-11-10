@@ -12,6 +12,7 @@ router.post("/user/todo", authMiddleware, todoController.add);
 router.delete("/user/todo/:id", authMiddleware, todoController.delete);
 router.get("/user/todo/:id", authMiddleware, todoController.fetchOne);
 router.get("/user/todo/", authMiddleware, todoController.fetchAll);
+router.put("/user/todo/:id", authMiddleware, todoController.update);
 
 router.use("/", (_: Request, res: Response) => {
   res.status(200).json({
