@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon",
     "tsc": "tsc",
-    "build": "npm run tsc",
+    "build": "rm -rf && npm run tsc",
     "postinstall": "tsc",
     "start": "node dist/server.js",
     "lint": "eslint . --ext .ts --fix"
@@ -39,13 +39,10 @@
   },
   "devDependencies": {
     "@types/node": "^16.11.6",
-    "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^5.3.0",
     "@typescript-eslint/parser": "^5.3.0",
     "eslint": "^8.2.0",
     "nodemon": "^2.0.14",
-    "rimraf": "^3.0.2",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.4.4"
+    "ts-node": "^10.4.0"
   }
 }
