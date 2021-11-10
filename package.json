@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon",
-    "build": "rm -rf ./dist && tsc",
+    "compile": "tsc",
+    "build": "rm -rf ./dist && npm run compile",
     "start": "npm run build && node dist/server.js",
     "lint": "eslint . --ext .ts --fix"
   },
