@@ -4,9 +4,14 @@ import mongoose from "mongoose";
 const { DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME } = process.env;
 
 const coneectDb = async () => {
+  const mongodbURI =
+    process.env.NODE_ENV === "production"
+      ? process.env.MONGODB_URI
+      : `mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}?authSource=admin`;
+
   try {
     await mongoose.connect(
-      `mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}?authSource=admin`,
+      mongodbURI!,
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore: Unreachable code error
       { useNewUrlParser: true, useUnifiedTopology: true }
