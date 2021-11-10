@@ -1,1 +1,0 @@
-//Latter on we are going to set the tests configuration
