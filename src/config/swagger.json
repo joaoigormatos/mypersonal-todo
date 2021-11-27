@@ -1,0 +1,303 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MyPersonal TODO API",
+    "description": "This API enables to CRUD TODO's",
+    "version": "0.1.2"
+  },
+  "swaggerOptions": {
+    "supportedSubmitMethods": []
+  },
+  "paths": {
+    "/user/todo": {
+      "post": {
+        "tags": ["TODO"],
+        "summary": "Create a TODO",
+        "description": "This endpoint ensures the todo creation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "title": "string",
+                    "example": "Workout"
+                  },
+                  "date": {
+                    "type": "string",
+                    "example": "11/27/2021"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "progress"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request. Check if headers and fields are present and well-formed."
+          },
+          "401": {
+            "description": "Unauthorized. Token is not valid."
+          },
+          "403": {
+            "description": "Forbidden. Server cannot perform the operation"
+          },
+          "409": {
+            "description": "Duplicated!"
+          }
+        }
+      },
+      "get": {
+        "tags": ["TODO"],
+        "summary": "Retrieve all TODO",
+        "description": "This endpoint ensures the todo retrival",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "name": {
+                        "title": "string",
+                        "example": "Workout"
+                      },
+                      "date": {
+                        "type": "string",
+                        "example": "11/27/2021"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "progress"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "201": {
+              "description": "Created"
+            },
+            "400": {
+              "description": "Bad request. Check if headers and fields are present and well-formed."
+            },
+            "401": {
+              "description": "Unauthorized. Token is not valid."
+            },
+            "403": {
+              "description": "Forbidden. Server cannot perform the operation"
+            },
+            "409": {
+              "description": "Duplicated!"
+            }
+          }
+        }
+      }
+    },
+
+    "/user/todo/{id}": {
+      "get": {
+        "tags": ["TODO"],
+        "summary": "Retrieve one TODO",
+        "description": "This endpoint ensures retrival of a specific TODO",
+
+        "parameters": [
+          {
+            "in": "path",
+            "name": "todoID",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID of the Todo to get"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "title": "string",
+                        "example": "481fd817-f1bf-43ef-9eda-fa00a49e879a"
+                      },
+                      "name": {
+                        "title": "string",
+                        "example": "Workout"
+                      },
+                      "date": {
+                        "type": "string",
+                        "example": "11/27/2021"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "progress"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request. Check if headers and fields are present and well-formed."
+          },
+          "401": {
+            "description": "Unauthorized. Token is not valid."
+          },
+          "403": {
+            "description": "Forbidden. Server cannot perform the operation"
+          },
+          "409": {
+            "description": "Duplicated!"
+          }
+        }
+      },
+      "put": {
+        "tags": ["TODO"],
+        "summary": "Updation of one TODO",
+        "description": "This endpoint ensures the update of one specific TODO",
+
+        "parameters": [
+          {
+            "in": "path",
+            "name": "todoID",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID of the Todo to get"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "title": "string",
+                    "example": "Workout"
+                  },
+                  "date": {
+                    "type": "string",
+                    "example": "11/27/2021"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "progress"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "title": "string",
+                        "example": "481fd817-f1bf-43ef-9eda-fa00a49e879a"
+                      },
+                      "name": {
+                        "title": "string",
+                        "example": "Workout"
+                      },
+                      "date": {
+                        "type": "string",
+                        "example": "11/27/2021"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "progress"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request. Check if headers and fields are present and well-formed."
+          },
+          "401": {
+            "description": "Unauthorized. Token is not valid."
+          },
+          "403": {
+            "description": "Forbidden. Server cannot perform the operation"
+          },
+          "409": {
+            "description": "Duplicated!"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["TODO"],
+        "summary": "Deletion of one TODO",
+        "description": "This endpoint ensures deletion of a specific TODO",
+
+        "parameters": [
+          {
+            "in": "path",
+            "name": "todoID",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID of the Todo to get"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request. Check if headers and fields are present and well-formed."
+          },
+          "401": {
+            "description": "Unauthorized. Token is not valid."
+          },
+          "403": {
+            "description": "Forbidden. Server cannot perform the operation"
+          },
+          "409": {
+            "description": "Duplicated!"
+          }
+        }
+      }
+    }
+  }
+}
