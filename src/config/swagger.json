@@ -214,34 +214,7 @@
         },
         "responses": {
           "200": {
-            "description": "ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "properties": {
-                      "id": {
-                        "title": "string",
-                        "example": "481fd817-f1bf-43ef-9eda-fa00a49e879a"
-                      },
-                      "name": {
-                        "title": "string",
-                        "example": "Workout"
-                      },
-                      "date": {
-                        "type": "string",
-                        "example": "11/27/2021"
-                      },
-                      "status": {
-                        "type": "string",
-                        "example": "progress"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "description": "ok"
           },
           "201": {
             "description": "Created"
