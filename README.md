@@ -1,6 +1,6 @@
 # Manager
 
-This repo is meant to be the backend for the eback project.
+This repo is meant to be the backend for the mypersonal-todo project.
 
 #### To install all the depedency just run:
 
